@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/amantandon/Documents/GitHub/Programming-In-CPP/Recursion",
+      "program": "/Users/amantandon/Documents/GitHub/Programming-In-CPP/Recursion/build/Debug/outDebug"
+    }
+  ]
+}
