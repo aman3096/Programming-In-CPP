@@ -1,33 +1,40 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void findNegativeNumbersOfWindowSize(vector<int> &v, int n, int k, vector<int> &negatives) {
-    int start = 0;
-    for(int end=0; end<n; end++) {
-        if(end-start+1 ==k) {
-            bool is_negative_found = false;
-            for(int j=start; j<end+1; j++) {
-                if(v[j]<0) {
-                    negatives.push_back(v[j]);
-                    is_negative_found = true;
-                    break;
-                }
-            }
-            if(!is_negative_found) {
-                negatives.push_back(0);
-            }
-            start++;
+void findNegativesInKWindow(vector<int> v, int n, int k, vector<int> &results) {
+    vector<int> negatives;
+    int i=0;
+    int j=0;
+    while(j < n) {
+        if(v[j]<0) {
+            negatives.push_back(v[j]);
         }
+        if(j-i+1 < k) {
+            j++;
+        }
+        else if(j-i+1 == k) {
+            if(negatives.size()==0) {
+                results.push_back(0);
+            } else {
+                results.push_back(negatives.front());
+                
+                if(!negatives.empty() && v[i]==negatives.front())
+                    negatives.erase(negatives.begin()+0);
+            }
+            i++;
+            j++;
+        }
+
     }
 }
 
 int main() {
-    vector<int> v = { 1, 2, -1, -7, 8, -15, 30, 16, 28 };
-    int k=3;
-    vector<int> firstNegatives;
-    findNegativeNumbersOfWindowSize(v, v.size(), k, firstNegatives);
-    for(int i=0; i<firstNegatives.size(); i++) {
-        cout<<firstNegatives[i]<<" ";
+    vector<int> v = { 12, -1, -7, 8, -15, 30, 16, 28 };
+    vector<int> results;
+    int k = 3; 
+    findNegativesInKWindow(v, v.size(), k, results);
+    for(auto result: results) {
+        cout<<result<<" ";
     }
     return 0;
 }
